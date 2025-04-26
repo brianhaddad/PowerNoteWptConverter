@@ -16,3 +16,5 @@ A few improvements I may make:
 Finally, if anyone has any technical information about the header data in the WPT file format I would love to read that data into my program in a way that could actually help decode the file. My simple test files had one byte that would occasionally be different between them, and I do not know what that byte means. Similarly, if anyone has a list of the control characters Brother was using around that time and what they meant, such information would be immensely useful to me!
 
 Note that the license for this project allows for all kinds of personal forking and remixing but if this code ends up in any commercial projects that would be a violation of the license. I want this to be a free public utility for users of the Brother PowerNote.
+
+Many thanks to ToughDev for linking to this repository from a [blog post about the Brother Super PowerNote PN-8500MDSe](https://www.toughdev.com/content/2016/06/brother-super-powernote-pn-8500mdse-vintage-word-processor/).
