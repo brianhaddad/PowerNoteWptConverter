@@ -7,6 +7,10 @@
 
         public bool EofError { get; private set; } = false;
 
+        //TODO: anything added to this list is likely a control code for formatting or some other non-standard character.
+        //Eventually I will want to find files that populate this dictionary and figure out what the characters represent.
+        private Dictionary<uint, char> _unknownCharacters = new();
+
         //Some of these are pretty clear from my test files, others (especially anything related to tabs)
         //are difficult to be sure of. This will require some additional testing and refining I think.
         private const byte CARRIAGE_RETURN = 0xBD;
@@ -144,8 +148,9 @@
                         break;
 
                     //Finally, most of the remaining characters should just be plain old ASCII.
+                    //However, we'll filter out anything that might be a stray control character.
                     default:
-                        line += (char)bytes[i];
+                        line += KnownStrings((char)bytes[i]);
                         i++;
                         break;
                 }
@@ -158,6 +163,18 @@
             }
 
             return lines.ToArray();
+        }
+
+        private string KnownStrings(char c)
+        {
+            if ((uint)c >= 33 && (uint)c <= 125)
+            {
+                return c.ToString();
+            }
+
+            _unknownCharacters[(uint)c] = c;
+
+            return "";
         }
     }
 }

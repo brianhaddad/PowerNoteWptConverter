@@ -24,17 +24,20 @@ if (inputFilePaths.Length > 0)
         var output = Path.Combine(folder, $"{fileNameWithoutExtension}.txt");
         wptToTxt.Process(path, output);
         Console.WriteLine($"\t{output}");
-        Console.WriteLine($"Header Bytes: {string.Join(" ", wptToTxt.HeaderBytes.Select(x => x.ToString("X2")))}");
         if (wptToTxt.EofError)
         {
             Console.WriteLine("EOF Error. Somehow reached the EOF character before the actual end of the bytestream.");
         }
     }
 }
+else
+{
+    Console.WriteLine("No input files found. Please provide .WPT files as command line arguments or drag your .WPT files onto the executable.");
+}
 
 #if DEBUG
-//Note: this is just local test code. Feel free to change the path values or play around with the output.
-Console.WriteLine("Begin test.");
+    //Note: this is just local test code. Feel free to change the path values or play around with the output.
+    Console.WriteLine("Begin test.");
 var inputPath = @"C:\Users\brian\Dropbox\projects\bit_banging\WPT\LONGTEST.WPT";
 var outputPath = @"C:\Users\brian\Dropbox\projects\bit_banging\WPT\LongTestOutput.txt";
 WptToTxt converter = new();
@@ -48,5 +51,5 @@ if (converter.EofError)
 }
 #endif
 
-Console.WriteLine("Done. Press enter to close the window.");
+Console.WriteLine("Done. Press enter to exit.");
 Console.ReadLine();
